@@ -15,4 +15,19 @@ export const day01Part01 = (input: string): number => {
   return numZeros
 }
 
+export const day01Part02 = (input: string): number => {
+  let dial = STARTING_NUMBER
+  const numZeros = splitInputIntoLines(input).reduce((acc, curr) => {
+    const direction = curr[0]
+    const sign = direction === "L" ? -1 : 1
+    const value = parseInt(curr.slice(1))
+    for (let i = 0; i < value; i++) {
+      dial = wrap100(dial + sign)
+      if (dial === 0) acc++
+    }
+    return acc
+  }, 0)
+  return numZeros
+}
+
 const wrap100 = (n: number): number => ((n % 100) + 100) % 100
