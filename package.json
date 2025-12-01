@@ -3,7 +3,7 @@
     "build": "npx tsc",
     "copyInputFiles": "cp -r input/ build/",
     "lint": "eslint src/ test/ --fix",
-    "test": "npm run build && npm run copyInputFiles && node -r source-map-support/register --test build/"
+    "test": "npm run build && npm run copyInputFiles && node -r source-map-support/register --test"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
