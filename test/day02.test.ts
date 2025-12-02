@@ -18,13 +18,13 @@ describe("Day 02", () => {
     assert.strictEqual(result, 40398804950)
   })
 
-//   test("Part 2 example", () => {
-//     const result = day02Part02(SAMPLE_INPUT)
-//     assert.strictEqual(result, 6)
-//   })
+  test("Part 2 example", () => {
+    const result = day02Part02(SAMPLE_INPUT)
+    assert.strictEqual(result, 4174379265)
+  })
 
-//   test("Part 2", () => {
-//     const result = day02Part02(input)
-//     assert.strictEqual(result, 5978)
-//   })
+  test("Part 2", () => {
+    const result = day02Part02(input)
+    assert.strictEqual(result, 65794984339)
+  })
 })
