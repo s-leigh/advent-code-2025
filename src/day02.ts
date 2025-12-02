@@ -19,19 +19,20 @@ export const day02Part01 = (input: string): number => {
 }
 
 export const day02Part02 = (input: string): number => {
-    const splitString = (str: string, parts: number): string[] => {
+    const uniqueParts = (str: string, parts: number): Set<string> => {
         const partLength = str.length / parts
-        const result = []
+        const result = new Set<string>()
         for (let i = 0; i < parts; i++) {
-            result.push(str.substring(i * partLength, (i + 1) * partLength))
+            result.add(str.substring(i * partLength, (i + 1) * partLength))
         }
         return result
     }
 
     const isValid = (id: string, splitDivisor: number = 2): boolean => {
         if (splitDivisor > id.length) return true
-        const parts = splitString(id, splitDivisor)
-        if (parts.filter(p => p === parts[0]).length === parts.length) return false
+        if ((id.length / splitDivisor) % 1 !== 0) return isValid(id, splitDivisor + 1) // only divide by integers
+        const parts = uniqueParts(id, splitDivisor)
+        if (parts.size === 1) return false
         return isValid(id, splitDivisor + 1)
     }
 
