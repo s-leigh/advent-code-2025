@@ -7,7 +7,25 @@ export const day07Part01 = (input: string): number => {
 }
 
 export const day07Part02 = (input: string): number => {
-  return -1
+  const diagram = splitInputIntoLines(input).map(line => line.split(""))
+  return paths(diagram)
+}
+
+const paths = (remaining: string[][], previousLine: number[] = []): number => {
+  if (remaining.length === 0) return previousLine.sum()
+  const thisLine = remaining[0]
+  if (previousLine.length === 0) {
+    const replacedS = thisLine.map(char => char === "S" ? 1 : 0)
+    return paths(remaining.slice(1), replacedS)
+  }
+  const newLine = thisLine.map((_, i, arr) => {
+    let count = 0
+    if (arr[i + 1] === "^" && previousLine[i + 1] > 0) count += previousLine[i + 1]
+    if (arr[i - 1] === "^" && previousLine[i - 1] > 0) count += previousLine[i - 1]
+    if (arr[i] === "." && previousLine[i] > 0) count += previousLine[i]
+    return count
+  })
+  return paths(remaining.slice(1), newLine)
 }
 
 const findSplits = (remaining: string[][], previousLine: string[] = [], splits: number = 0): number => {
